@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SensorSim</title>
+	<meta charset="utf-8" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1>Welcome to the Sensor Simulation Website!</h1>
+            <p class="lead">Please fill in the form below with your Event Hub details</p>
+
+            <form action="SensorPage.html">
+                <div class="form-group">
+                    <label for="ServiceBusNS">Service Bus Namespace</label>
+                    <input type="text" class="form-control" id="ServiceBusNS" placeholder="Enter Service Bus Namespace" required/>
+                </div>
+                <div class="form-group">
+                    <label for="EHName">Event Hub Name</label>
+                    <input type="text" class="form-control" id="EHName" placeholder="Enter Event Hub Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="KeyName">Policy Name</label>
+                    <input type="text" class="form-control" id="KeyName" placeholder="Enter Policy Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Key">Policy Key</label>
+                    <input type="text" class="form-control" id="Key" placeholder="Enter Policy Key" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Display Name">Display Name</label>
+                    <input type="text" class="form-control" id="Display Name" placeholder="Enter Display Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Organisation">Organisation</label>
+                    <input type="text" class="form-control" id="Organisation" placeholder="Enter Organisation Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Location">Location</label>
+                    <input type="text" class="form-control" id="Location" placeholder="Enter Location" required/>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
