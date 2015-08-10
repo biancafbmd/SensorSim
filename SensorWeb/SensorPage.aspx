@@ -3,18 +3,19 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <title>SensorSim</title>
     <meta charset="utf-8" />
 
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
+    
 </head>
-<body>
-   <form class="form-horizontal" runat="server">
+<body id="bodyclass">  
+   <form class="form-horizontal" runat="server" id="formid">   
+       <asp:scriptmanager id="ScriptManager1" runat="server" EnablePageMethods="true"/>
        <div class="container">
         <div class="row">
-            <h1>Start Sending Data to Event Hub</h1>
+            <h1>Start Sending Data to Event Hub</h1>    
             <hr />
             <div class="form-group">
                 <label for="sensortype1" class="col-sm-3 control-label input-lg">Sensor type</label>
@@ -22,7 +23,7 @@
                     <select class="form-control input-lg" id="sensortype1" runat="server">
                       <option value="Temp">Temp</option>
                       <option value="Humidity">Humidity</option>
-                      <option value="PID">PID</option>
+                      <option value="HeartRate">HeartRate</option>
                     </select>
                 </div>
             </div>
@@ -51,7 +52,7 @@
                     <select class="form-control input-lg" id="sensortype2" runat="server">
                       <option value="Temp">Temp</option>
                       <option value="Humidity">Humidity</option>
-                      <option value="PID">PID</option>
+                      <option value="HeartRate">HeartRate</option>
                     </select>
                 </div>
             </div>
@@ -80,7 +81,7 @@
                     <select class="form-control input-lg" id="sensortype3" runat="server">
                       <option value="Temp">Temp</option>
                       <option value="Humidity">Humidity</option>
-                      <option value="PID">PID</option>
+                      <option value="HeartRate">HeartRate</option>
                     </select>
                 </div>
             </div>
@@ -109,7 +110,7 @@
                     <input type="text" class="form-control input-lg" id="datafreq" placeholder="Data Frequency in sec" runat="server" required="required" />
                 </div> 
             </div>
-            <asp:Button ID="StartEH" Text="Start Event Hub" CssClass="btn btn-lg btn-default center-block" OnClick="StartEH_Click" runat="server" />
+            <asp:Button ID="SendButton" Text="Start Event Hub" CssClass="btn btn-lg btn-default center-block" OnClick="StartEH_Click" runat="server" />
         </div>
         </div>
    </form>
@@ -120,5 +121,6 @@
     <script src="js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    
 </body>
 </html>

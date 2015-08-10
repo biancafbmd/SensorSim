@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
 using System.Text;
 using System.IO;
 using System.Timers;
@@ -16,12 +17,12 @@ namespace SensorWeb
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
-        private static System.Timers.Timer aTimer;
+        //static System.Timers.Timer EventHubTimer;
         EventHubClient client;
-        List<ConnectSensor> sensors;
+        private List<ConnectSensor> sensors;
         static Random rand;
-
-        string trial;
+        private int[] min;
+        private int[] max;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,38 +31,74 @@ namespace SensorWeb
                 Global.EventHubPars.EHname = Request.Form["EHName"];
                 Global.EventHubPars.ConnectionString = Request.Form["ConnectionString"];
                 Global.EventHubPars.DisplayName = Request.Form["DisplayName"];
-                Global.EventHubPars.Organisation = Request.Form["Organisation"];
+                Global.EventHubPars.Organization = Request.Form["Organisation"];
                 Global.EventHubPars.Location = Request.Form["Location"];
+                
             }
             else
             {
-                
             }
             
         }
 
-        //TODO: check state of the button to device what to initialise or not
         protected void StartEH_Click(object sender, EventArgs e)
         {
-            trial = Request.Form["sensortype1"];
-            System.Diagnostics.Debug.WriteLine(trial);
-            string name = "ehdevices";
-            string connectionString = "Endpoint=sb://demoiotconnect-ns.servicebus.windows.net/;SharedAccessKeyName=D1;SharedAccessKey=ATxDT/vwvRHfvIjnILPlQJJeClJ5sUbWAlLSZqqVTgM=";
+            if (SendButton.Text.StartsWith("Start"))
+            {
+                Global.ifStart = true;
+                SendButton.Text = "Stop Event Hub";
 
-            //set Event Hub Client
-            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(connectionString+ ";TransportType=Amqp");
-            client = factory.CreateEventHubClient(name);
+                //set Event Hub Client
+                MessagingFactory factory = MessagingFactory.CreateFromConnectionString(Global.EventHubPars.ConnectionString + ";TransportType=Amqp");
+                client = factory.CreateEventHubClient(Global.EventHubPars.EHname);
 
-            //initialise sensor attributes
-            ConnectSensor sensor1 = new ConnectSensor("2298a348-e2f9-4438-ab23-82a3930662ab", Global.EventHubPars.DisplayName, Global.EventHubPars.Organisation, Global.EventHubPars.Location, "temp", "C");
+                //initialise sensors
+                sensors = new List<ConnectSensor> {
+                    new ConnectSensor("5eb6aaff-02de-40e9-a5e6-547f4b456360", sensortype1.Value, sensorunit1.Value),
+                    new ConnectSensor("9e511c82-57a6-4608-ab39-b0226d2112ea", sensortype2.Value, sensorunit2.Value),
+                    new ConnectSensor("5a15b803-cbc5-4ae6-a0e6-5ca4935469cc", sensortype3.Value, sensorunit3.Value)
+                };
 
-            sensors = new List<ConnectSensor> { sensor1 };
+                SetSensorAttributes();
 
-            //initialise random int generator
-            rand = new Random();
+                //set min/max ranges
+                min = new int[] {
+                    Convert.ToInt32(minrange1.Value),
+                    Convert.ToInt32(minrange2.Value),
+                    Convert.ToInt32(minrange3.Value)
+                };
 
-            //set Timer
-            SetTimer(aTimer, 2000);                     
+                max = new int[]
+                {
+                    Convert.ToInt32(maxrange1.Value),
+                    Convert.ToInt32(maxrange2.Value),
+                    Convert.ToInt32(maxrange3.Value)
+                };
+
+
+                //initialise random int generator
+                rand = new Random();
+
+                //set Timer using the user-defined value
+                double seconds = Convert.ToDouble(datafreq.Value) * 1000;
+                Global.EventHubTimer = new System.Timers.Timer();
+                SetTimer(Global.EventHubTimer, seconds);
+            }
+            else if (SendButton.Text.StartsWith("Stop"))
+            {
+                SendButton.Text = "Start Event Hub";
+
+                try
+                {
+                    Global.EventHubTimer.Enabled = false;
+                    Global.EventHubTimer.Close();
+                }
+                catch (NullReferenceException nullRef)
+                {
+                    System.Diagnostics.Debug.WriteLine(nullRef.Message);
+                }
+                
+            }                 
 
         }
 
@@ -71,11 +108,11 @@ namespace SensorWeb
             EventData data;
             string message;
 
-            foreach(ConnectSensor sensor in sensors)
+            for (int i = 0; i < sensors.Count; i++)
             {
-                sensor.timecreated = DateTime.UtcNow.ToString("o");
-                sensor.value = rand.Next(22, 25);
-                message = sensor.ToJson();
+                sensors[i].timecreated = DateTime.UtcNow.ToString("o");
+                sensors[i].value = rand.Next(min[i], max[i]);
+                message = sensors[i].ToJson();
 
                 data = new EventData(Encoding.UTF8.GetBytes(message));
                 client.Send(data);
@@ -85,9 +122,19 @@ namespace SensorWeb
         //Sets the timer to send data to Azure Event Hub periodically
         private void SetTimer(System.Timers.Timer timer, double value)
         {
-            timer = new System.Timers.Timer(value);
+            timer.Interval = value;
             timer.Elapsed += ATimer_Elapsed;
             timer.Enabled = true;
+        }
+
+        private void SetSensorAttributes()
+        {
+            foreach(ConnectSensor sensor in sensors)
+            {
+                sensor.displayname = Global.EventHubPars.DisplayName;
+                sensor.location = Global.EventHubPars.Location;
+                sensor.organization = Global.EventHubPars.Organization;
+            }
         }
     }
 }

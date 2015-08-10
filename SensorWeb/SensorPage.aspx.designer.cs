@@ -13,6 +13,24 @@ namespace SensorWeb {
     public partial class WebForm2 {
         
         /// <summary>
+        /// formid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm formid;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// sensortype1 control.
         /// </summary>
         /// <remarks>
@@ -130,12 +148,12 @@ namespace SensorWeb {
         protected global::System.Web.UI.HtmlControls.HtmlInputText datafreq;
         
         /// <summary>
-        /// StartEH control.
+        /// SendButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button StartEH;
+        protected global::System.Web.UI.WebControls.Button SendButton;
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.IO;
 using System.Text;
+using System.Timers;
 
 using Microsoft.ServiceBus;
 
@@ -13,13 +14,12 @@ using System.Runtime.Serialization.Json;
 
 namespace SensorWeb
 {
-
     public struct EventHubParameters
     {
         public string EHname { get; set; }
         public string ConnectionString { get; set; }
         public string DisplayName { get; set; }
-        public string Organisation { get; set; }
+        public string Organization { get; set; }
         public string Location { get; set; }
     }
 
@@ -40,13 +40,10 @@ namespace SensorWeb
 
         }
 
-        //constructor taking mor arguments
-        public ConnectSensor(string guid, string name, string org, string loc, string measure, string unit)
+        //constructor taking more arguments
+        public ConnectSensor(string guid, string measure, string unit)
         {
             this.guid = guid;
-            this.displayname = name;
-            this.organization = org;
-            this.location = loc;
             this.measurename = measure;
             this.unitofmeasure = unit;
         }
@@ -65,7 +62,9 @@ namespace SensorWeb
 
     public partial class Global : System.Web.HttpApplication
     {
-        public static EventHubParameters EventHubPars; 
+        public static EventHubParameters EventHubPars;
+        public static System.Timers.Timer EventHubTimer;
+        public static Boolean ifStart = false;
 
         protected void Application_Start(object sender, EventArgs e)
         {
@@ -94,12 +93,21 @@ namespace SensorWeb
 
         protected void Session_End(object sender, EventArgs e)
         {
+            try
+                {
+                    Global.EventHubTimer.Enabled = false;
+                    Global.EventHubTimer.Close();
+                }
+            catch (NullReferenceException nullRef)
+                {
+                    System.Diagnostics.Debug.WriteLine(nullRef.Message);
+                }        
 
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            
         }
 
     }
