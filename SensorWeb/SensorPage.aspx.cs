@@ -55,7 +55,7 @@ namespace SensorWeb
 
                 //initialise sensors
                 sensors = new List<ConnectSensor> {
-                    new ConnectSensor("5eb6aaff-02de-40e9-a5e6-547f4b456360", sensortype1.Value, sensorunit1.Value)
+                    new ConnectSensor(sensorguid1.Value, sensortype1.Value, sensorunit1.Value)
                 };
 
                 SetSensorAttributes();

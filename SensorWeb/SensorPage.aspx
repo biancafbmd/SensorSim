@@ -34,6 +34,12 @@
                 </div>          
             </div>
             <div class="form-group">
+                <label for="sensorguid1" class="col-sm-3 control-label input-lg">Globally Unique Identifier</label>
+                <div class="col-sm-9">
+                     <input type="text" class="form-control input-lg" id="sensorguid1" placeholder="Globally Unique Identifier" runat="server" required="required" />
+                </div>          
+            </div>
+            <div class="form-group">
                 <label for="minrange1" class="col-sm-3 control-label input-lg">Sensor data value range</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control input-lg" id="minrange1" placeholder="Min" runat="server" required="required" />  
