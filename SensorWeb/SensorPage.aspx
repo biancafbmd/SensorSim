@@ -46,64 +46,7 @@
                 </div> 
             </div>
             <hr />
-            <div class="form-group">
-                <label for="sensortype2" class="col-sm-3 control-label input-lg">Sensor type</label>
-                <div class="col-sm-9">
-                    <select class="form-control input-lg" id="sensortype2" runat="server">
-                      <option value="Temp">Temp</option>
-                      <option value="Humidity">Humidity</option>
-                      <option value="HeartRate">HeartRate</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="sensorunit2" class="col-sm-3 control-label input-lg">Sensor Unit of Measure</label>
-                <div class="col-sm-9">
-                     <input type="text" class="form-control input-lg" id="sensorunit2" placeholder="Unit of Measure" runat="server" required="required" />
-                </div>          
-            </div>
-            <div class="form-group">
-                <label for="minrange2" class="col-sm-3 control-label input-lg">Sensor data value range</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control input-lg" id="minrange2" placeholder="Min" runat="server" required="required" />  
-                </div>             
-            </div>
-            <div class="form-group">
-                <label for="maxrange2" class="col-sm-3 control-label input-lg"></label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control input-lg" id="maxrange2" placeholder="Max" runat="server" required="required" />
-                </div> 
-            </div>
-            <hr />
-            <div class="form-group">
-                <label for="sensortype3" class="col-sm-3 control-label input-lg">Sensor type</label>
-                <div class="col-sm-9">
-                    <select class="form-control input-lg" id="sensortype3" runat="server">
-                      <option value="Temp">Temp</option>
-                      <option value="Humidity">Humidity</option>
-                      <option value="HeartRate">HeartRate</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="sensorunit3" class="col-sm-3 control-label input-lg">Sensor Unit of Measure</label>
-                <div class="col-sm-9">
-                     <input type="text" class="form-control input-lg" id="sensorunit3" placeholder="Unit of Measure" runat="server" required="required" />
-                </div>          
-            </div>
-            <div class="form-group">
-                <label for="minrange3" class="col-sm-3 control-label input-lg">Sensor data value range</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control input-lg" id="minrange3" placeholder="Min" runat="server" required="required" />  
-                </div>             
-            </div>
-            <div class="form-group">
-                <label for="maxrange3" class="col-sm-3 control-label input-lg"></label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control input-lg" id="maxrange3" placeholder="Max" runat="server" required="required" />
-                </div> 
-            </div>
-            <hr />
+            
             <div class="form-group">
                 <label for="datafreq" class="col-sm-3 control-label input-lg">Data Frequency</label>
                 <div class="col-sm-9">

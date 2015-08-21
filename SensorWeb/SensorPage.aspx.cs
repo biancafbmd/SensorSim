@@ -46,7 +46,8 @@ namespace SensorWeb
             if (SendButton.Text.StartsWith("Start"))
             {
                 Global.ifStart = true;
-                SendButton.Text = "Stop Event Hub";
+                SendButton.Text = "Sending to Event Hub";
+                SendButton.Enabled = false;
 
                 //set Event Hub Client
                 MessagingFactory factory = MessagingFactory.CreateFromConnectionString(Global.EventHubPars.ConnectionString + ";TransportType=Amqp");
@@ -54,25 +55,19 @@ namespace SensorWeb
 
                 //initialise sensors
                 sensors = new List<ConnectSensor> {
-                    new ConnectSensor("5eb6aaff-02de-40e9-a5e6-547f4b456360", sensortype1.Value, sensorunit1.Value),
-                    new ConnectSensor("9e511c82-57a6-4608-ab39-b0226d2112ea", sensortype2.Value, sensorunit2.Value),
-                    new ConnectSensor("5a15b803-cbc5-4ae6-a0e6-5ca4935469cc", sensortype3.Value, sensorunit3.Value)
+                    new ConnectSensor("5eb6aaff-02de-40e9-a5e6-547f4b456360", sensortype1.Value, sensorunit1.Value)
                 };
 
                 SetSensorAttributes();
 
                 //set min/max ranges
                 min = new int[] {
-                    Convert.ToInt32(minrange1.Value),
-                    Convert.ToInt32(minrange2.Value),
-                    Convert.ToInt32(minrange3.Value)
+                    Convert.ToInt32(minrange1.Value)
                 };
 
                 max = new int[]
                 {
-                    Convert.ToInt32(maxrange1.Value),
-                    Convert.ToInt32(maxrange2.Value),
-                    Convert.ToInt32(maxrange3.Value)
+                    Convert.ToInt32(maxrange1.Value)
                 };
 
 
@@ -84,6 +79,7 @@ namespace SensorWeb
                 Global.EventHubTimer = new System.Timers.Timer();
                 SetTimer(Global.EventHubTimer, seconds);
             }
+            /* Stop version of the button not working as expected 
             else if (SendButton.Text.StartsWith("Stop"))
             {
                 SendButton.Text = "Start Event Hub";
@@ -98,7 +94,7 @@ namespace SensorWeb
                     System.Diagnostics.Debug.WriteLine(nullRef.Message);
                 }
                 
-            }                 
+            }  */               
 
         }
 
