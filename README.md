@@ -11,7 +11,7 @@ There are some existing bugs which are not fixed at the moment, so it is highly 
 when you are not experimenting with it. Otherwise, it might send data to Event Hub continuously, hence incurring additional
 Azure costs.
 
-**Use at your own risk**
+**Use at your own risk!!!**
 
 
 
