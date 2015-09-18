@@ -3,13 +3,13 @@ Sensor Simulation web app which sends data to Azure Event Hub.
 The sensor data you send is randomly generated from the range you specify once the website is running.
 
 You need to specify your Event Hub parameters before you are able to send this data through. Once you start sending
-data, there is no way of stopping that through the website. You need to go and stop the website in Microsoft Azure
+data, there is no way of stopping that through the website. You need to go and stop the website in Microsoft Azure portal
 (if you are running it in the cloud).
 
 **Warning** This web app was created as a demo environment, hence its performance and stability is not guaranteed.
-There are some existing bugs which are not fixed at the moment, so it is highly recommended that you stop this website
-when you are not experimenting with it. Otherwise, it might send data to Event Hub continuously, hence incurring additional
-Azure costs.
+There are some existing bugs which are not fixed at the moment, so it is highly recommended that you stop this website 
+from the Azure portal when you are not experimenting with it. Otherwise, it might send data to Event Hub continuously, 
+hence incurring additional Azure costs.
 
 **Use at your own risk!!!**
 
