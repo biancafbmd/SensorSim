@@ -7,7 +7,7 @@ data, there is no way of stopping that through the website. You need to go and s
 (if you are running it in the cloud).
 
 **Warning** This web app was created as a demo environment, hence its performance and stability is not guaranteed.
-There are some existing bugs which are not fixed at the moment, so it is highle recommended that you stop this website
+There are some existing bugs which are not fixed at the moment, so it is highly recommended that you stop this website
 when you are not experimenting with it. Otherwise, it might send data to Event Hub continously, hence incurring additional
 Azure costs.
 
